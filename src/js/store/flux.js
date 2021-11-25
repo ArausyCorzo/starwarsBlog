@@ -1,42 +1,53 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			URL_BASE: "https://www.swapi.tech/api",
+			listPeople: [],
+			listPlenets: [],
+			listVehicles: []
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
-			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
+			getThings: async endpoint => {
+				try {
+					const store = getStore();
+					const response = await fetch(`${store.URL_BASE}/${endpoint}`);
+					if (response.ok) {
+						let body = await response.json();
+						setStore({
+							...store,
+							[endpoint]: body.results
+						});
+					}
+					// console.log(body);
+				} catch (error) {
+					console.log(error, "EXPLOTE D:");
+				}
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
+				// try {
+				// 	const response = await fetch(`${store.URL_BASE}/planets`);
+				// 	let data = await response.json();
+				// 	if (response.ok) {
+				// 		setStore({
+				// 			...store,
+				// 			listPlenets: data.results
+				// 		});
+				// 	}
+				// } catch (error) {
+				// 	console.log(error, "EXPLOTE D:");
+				// }
 
-				//reset the global store
-				setStore({ demo: demo });
+				// try {
+				// 	const response = await fetch(`${store.URL_BASE}/vehicles`);
+				// 	let result = await response.json();
+				// 	if (response.ok) {
+				// 		setStore({
+				// 			...store,
+				// 			listVehicles: result.results
+				// 		});
+				// 	}
+				// } catch (error) {
+				// 	console.log(error, "EXPLOTE D:");
+				// }
 			}
 		}
 	};

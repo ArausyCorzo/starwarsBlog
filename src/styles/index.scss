@@ -1,3 +1,33 @@
-/* 
-    General Styles
-*/
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}
+
+.icon>img{
+    padding: 10px;
+    width: 100px;
+}
+
+h1{
+    color: rgb(167, 0, 0);
+}
+.card{
+    min-width: 400px;
+    max-width: 400px;
+    margin: 15px;
+}
+
+.row-card{
+    display: flex;
+    overflow-x: scroll;
+    margin-bottom: 50px;
+}
+
+.buttons{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+
