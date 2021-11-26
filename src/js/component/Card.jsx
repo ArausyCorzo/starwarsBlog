@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import "../../styles/index.scss";
+import { Link } from "react-router-dom";
+import { Context } from "../store/appContext";
 
-const Card = ({ item }) => {
+const Card = ({ item, type }) => {
+	const { store, actions } = useContext(Context);
 	return (
 		<div className="card">
 			<img src="https://via.placeholder.com/400x200" className="card-img-top" alt="..." />
@@ -11,10 +14,15 @@ const Card = ({ item }) => {
 				<p className="card-desciption" />
 
 				<div className="buttons">
-					<button type="button" className="btn btn-outline-primary">
+					<Link to={`/${type}/${item.uid}`} type="button" className="btn btn-outline-primary">
 						Learn more!
-					</button>
-					<button type="button" className="button-y btn btn-outline-warning">
+					</Link>
+					<button
+						type="button"
+						className="button-y btn btn-outline-warning"
+						onClick={() => {
+							actions.addFavorites(item.name, type);
+						}}>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="16"
@@ -34,5 +42,6 @@ const Card = ({ item }) => {
 export default Card;
 
 Card.propTypes = {
-	item: PropTypes.object
+	item: PropTypes.object,
+	type: PropTypes.string
 };

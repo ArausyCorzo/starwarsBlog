@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
 import Header from "./views/Header.jsx";
+import Detail from "./views/Detail.jsx";
 import injectContext from "./store/appContext";
 
 import Navbar from "./component/Navbar.jsx";
@@ -22,6 +23,11 @@ const Layout = () => {
 						<Route exact path="/">
 							<Header />
 						</Route>
+
+						<Route exact path="/:type/:id">
+							<Detail />
+						</Route>
+
 						<Route>
 							<h1>Not found!</h1>
 						</Route>

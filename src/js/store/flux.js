@@ -2,9 +2,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			URL_BASE: "https://www.swapi.tech/api",
-			listPeople: [],
-			listPlenets: [],
-			listVehicles: []
+			people: [],
+			planets: [],
+			vehicles: [],
+			detail: {},
+			favorites: []
 		},
 		actions: {
 			getThings: async endpoint => {
@@ -22,32 +24,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					console.log(error, "EXPLOTE D:");
 				}
+			},
 
-				// try {
-				// 	const response = await fetch(`${store.URL_BASE}/planets`);
-				// 	let data = await response.json();
-				// 	if (response.ok) {
-				// 		setStore({
-				// 			...store,
-				// 			listPlenets: data.results
-				// 		});
-				// 	}
-				// } catch (error) {
-				// 	console.log(error, "EXPLOTE D:");
-				// }
+			addFavorites: (name, type) => {
+				const store = getStore();
+				let thing;
+				if (type === "people") {
+					thing = store.people.find(item => {
+						return item.name == name;
+					});
+				} else if (type === "planets") {
+					thing = store.planets.find(item => {
+						return item.name == name;
+					});
+				} else {
+					thing = store.vehicles.find(item => {
+						return item.name == name;
+					});
+				}
 
-				// try {
-				// 	const response = await fetch(`${store.URL_BASE}/vehicles`);
-				// 	let result = await response.json();
-				// 	if (response.ok) {
-				// 		setStore({
-				// 			...store,
-				// 			listVehicles: result.results
-				// 		});
-				// 	}
-				// } catch (error) {
-				// 	console.log(error, "EXPLOTE D:");
-				// }
+				setStore({ ...store, favorites: [...store.favorites, thing] });
 			}
 		}
 	};

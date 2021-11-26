@@ -13,8 +13,8 @@ const Header = () => {
 					<strong>Characters</strong>
 				</h1>
 				<div className="row-card">
-					{store.listPeople.map(item => {
-						return <Card key={item.uid} item={item} />;
+					{store.people.map(item => {
+						return <Card key={item.uid} item={item} type="people" />;
 					})}
 				</div>
 			</div>
@@ -26,8 +26,8 @@ const Header = () => {
 					<strong>Planest</strong>
 				</h1>
 				<div className="row-card">
-					{store.listPlenets.map(item => {
-						return <Card key={item.uid} item={item} />;
+					{store.planets.map(item => {
+						return <Card key={item.uid} item={item} type="planets" />;
 					})}
 				</div>
 			</div>
@@ -39,8 +39,8 @@ const Header = () => {
 					<strong>Vehicles</strong>
 				</h1>
 				<div className="row-card">
-					{store.listVehicles.map(item => {
-						return <Card key={item.uid} item={item} />;
+					{store.vehicles.map(item => {
+						return <Card key={item.uid} item={item} type="vehicles" />;
 					})}
 				</div>
 			</div>
