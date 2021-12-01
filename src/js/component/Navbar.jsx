@@ -3,9 +3,9 @@ import "../../styles/index.scss";
 import { Context } from "../store/appContext";
 
 const Navbar = () => {
-	const { store, action } = useContext(Context);
+	const { store, actions } = useContext(Context);
 	return (
-		<nav className="navbar navbar-light bg-light mb-3">
+		<nav className="navbar navbar-light bg-light mb-3 px-4">
 			<div className="icon">
 				<img src="https://cdn.goodvinilos.com/61003/logo-star-wars.jpg" />
 			</div>
@@ -20,12 +20,17 @@ const Navbar = () => {
 						aria-expanded="false">
 						{`Favorites ${store.favorites.length}`}
 					</button>
-					<ul className="dropdown-menu" aria-labelledby="dropdownMenu2">
+					<ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenu2">
 						{store.favorites.map(favorites => {
 							return (
-								<li key={favorites.name}>
+								<li
+									className="list list-group-item"
+									key={favorites.name}
+									onClick={() => {
+										actions.deleteTasks(favorites.name);
+									}}>
 									{favorites.name}
-									<i className="bi bi-trash" />
+									<i className="fas fa-trash trash__icon" />
 								</li>
 							);
 						})}

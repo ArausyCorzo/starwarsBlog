@@ -44,6 +44,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 
 				setStore({ ...store, favorites: [...store.favorites, thing] });
+			},
+
+			deleteTasks: name => {
+				const store = getStore();
+				const newList = store.favorites.filter(item => {
+					return name != item.name;
+				});
+				setStore({ ...store, favorites: newList });
 			}
 		}
 	};

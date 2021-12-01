@@ -9,9 +9,6 @@
     width: 100px;
 }
 
-h1{
-    color: rgb(167, 0, 0);
-}
 .card{
     min-width: 400px;
     max-width: 400px;
@@ -28,4 +25,24 @@ h1{
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
+}
+
+.list{
+    display: flex;
+    justify-content: space-between;
+    align-content: space-between;
+}
+
+.card-des{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.card-description{
+    color: rgb(0, 0, 0);
+    text-align: center;
+}
+
+.flor>p{
+    color: rgb(182, 27, 27);
 }
