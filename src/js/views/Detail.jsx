@@ -1,23 +1,25 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+
 const Detail = () => {
 	const { store, actions } = useContext(Context);
 	const { id, type } = useParams();
-	const [detail, setDetail] = useState({});
+	// const [detail, setDetail] = useState({});
 
 	useEffect(() => {
-		console.log(id, type);
-		if (id) {
-			for (let arr in store) {
-				if (arr === type) {
-					let newItem = store[type].find(item => {
-						return item.uid == id;
-					});
-					setDetail(newItem);
-				}
-			}
-		}
+		// console.log(id, type);
+		// if (id) {
+		// 	for (let arr in store) {
+		// 		if (arr === type) {
+		// 			let newItem = store[type].find(item => {
+		// 				return item.uid == id;
+		// 			});
+		// 			setDetail(newItem);
+		// 		}
+		// 	}
+		// }
+		actions.getdetails(id, type);
 	}, []);
 
 	return (
@@ -34,7 +36,7 @@ const Detail = () => {
 					<div className="col-md-8 card-description">
 						<div className="description">
 							<h3 className="title">
-								<strong>{detail.name}</strong>
+								<strong>{store.detail.name}</strong>
 							</h3>
 							<h5 className="description-card">
 								{`This is a wider card with supporting text below as a natural lead-in to additional content.
@@ -46,9 +48,9 @@ const Detail = () => {
 
 				<div className="row">
 					<div className="border-top border-danger  flor">
-						<p>
+						{/* <p>
 							<strong>{`here is the description about ${detail.name}`}</strong>
-						</p>
+						</p> */}
 					</div>
 				</div>
 			</div>

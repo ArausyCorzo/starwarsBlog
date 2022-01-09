@@ -1,3 +1,5 @@
+import { ids } from "webpack";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -52,6 +54,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return name != item.name;
 				});
 				setStore({ ...store, favorites: newList });
+			},
+
+			getdetails: async (id, endpoint) => {
+				let store = getStore();
+				try {
+					const response = await fetch(`${store.URL_BASE}/${endpoint}/${id}`);
+					const body = await response.json();
+					console.log(body);
+
+					if (response.ok) {
+						setStore({ ...store, detail: body.result.properties });
+					}
+				} catch (error) {}
 			}
 		}
 	};
